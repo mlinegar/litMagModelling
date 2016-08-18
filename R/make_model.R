@@ -1,11 +1,11 @@
 #' Create a Mallet instance list; from here we can gather word frequency statistics
-#' 
+#'
 #' @param dataframe data.frame usually taken from prep_corpus, a data.frame with fields for text, journal, date
 #' @param n.topics numeric number of topics that we want from LDA
 #' @param idcolname string the name of the id column from dataframe
 #' @param textcolname string the name of the text column from dataframe
 #' @param datecolname string the name of the date column from dataframe
-#' @param journalVec vector a vector of the names of journals to be included. 
+#' @param journalVec vector a vector of the names of journals to be included.
 #' possibile examples are "Blast", "Egoist", "Poetry Magazine", "Freewoman", "NewFreewoman"
 #' @param yearRangeRule string the rule specifying which years are to be included. Can take values like
 #' "> 1900", "==1919", etc.
@@ -14,7 +14,7 @@
 #' @return a Mallet object that from which we can get word frequencies, and can run LDA on
 #' @seealso \code{\link{prep_corpus}}, which creates the data.frame this function draws on
 #' @export
-#' @examples 
+#' @examples
 #' date_vec <- date_vec
 #' dataframe <- stripped_xmlData
 #' marsden_journals <- make_model(dataframe, 10, journalVec = c("Blast", "Egoist", "Freewoman", "NewFreewoman"))

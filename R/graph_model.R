@@ -7,7 +7,7 @@
 #' @return n.topics graphs spread of chunkLen pages
 #' @seealso \code{\link{train_model}}, which runs LDA on a Mallet instance
 #' @export
-#' @examples 
+#' @examples
 #' date_vec <- date_vec
 #' dataframe <- stripped_xmlData
 #' marsden_journals <- make_model(dataframe, 10, journalVec = c("Blast", "Egoist", "Freewoman", "NewFreewoman"))
@@ -29,17 +29,18 @@ graph_model <- function(df, baseColNames=c("text", "date", "id", "journal"), chu
       M <- gather(subdf,topic,value,-id,-date,-journal,-text) %>%
         group_by(topic,date,journal, id) %>%
         summarize(value=mean(value))
-      plot <- ggplot(M,aes(x=date,color=journal,y=value)) + 
+      plot <- ggplot(M,aes(x=date,color=journal,y=value)) +
         geom_point() +
         geom_line() +
-        facet_grid(topic~.)
+        facet_grid(topic~.) +
+        ggtitle(paste0("Topic makeup over time for topics ", min(colsToGraph), ":", max(colsToGraph)))
       print(plot)
     }
   } else {
     M <- gather(df,topic,value,-id,-date,-journal,-text) %>%
       group_by(topic,date,journal, id) %>%
       summarize(value=mean(value))
-    plot <- ggplot(M,aes(x=date,color=journal,y=value)) + 
+    plot <- ggplot(M,aes(x=date,color=journal,y=value)) +
       geom_point() +
       geom_line() +
       facet_grid(topic~.)
