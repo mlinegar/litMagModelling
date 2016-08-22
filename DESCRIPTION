@@ -1,6 +1,6 @@
 Package: litMagModelling
 Title: Easily Topic Analysis of the Modernist Journals Project with LDA
-Version: 0.0.1
+Version: 0.1.1
 Authors@R: person("Mitchell", "Linegar", email = "mitchell.linegar@gmail.com", role = c("aut", "cre"))
 Description: Provides an easy interface to find word frequencies, run LDA with
     Mallet, and graph the results.
