@@ -9,3 +9,12 @@ Depends:
 License: What license is it under?
 LazyData: TRUE
 RoxygenNote: 5.0.1
+Imports: dplyr,
+    devtools,
+    lubridate,
+    mallet,
+    rJava,
+    ggplot2,
+    LDAvis
+Suggests: servr,
+    gistr
