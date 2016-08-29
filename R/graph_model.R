@@ -14,7 +14,6 @@
 #' graph_model(marsden_journals, chunkLen = 6)
 
 graph_model <- function(df, baseColNames=c("text", "date", "id", "journal"), chunkLen=10){
-  library(dplyr); library(tidyr); library(ggplot2)
   topic.df <- df[, -which(names(df) %in% baseColNames)]
   base.df <- df[, which(names(df) %in% baseColNames)]
   n.topics <- ncol(topic.df)
@@ -26,24 +25,24 @@ graph_model <- function(df, baseColNames=c("text", "date", "id", "journal"), chu
       subdf <- cbind(base.df, topicsToGraph)
       # if the names of the columns ever change this will have to as well
       # for now I'll leave it
-      M <- gather(subdf,topic,value,-id,-date,-journal,-text) %>%
-        group_by(topic,date,journal, id) %>%
-        summarize(value=mean(value))
-      plot <- ggplot(M,aes(x=date,color=journal,y=value)) +
-        geom_point() +
-        geom_line() +
-        facet_grid(topic~.) +
-        ggtitle(paste0("Topic makeup over time for topics ", min(colsToGraph), ":", max(colsToGraph)))
+      M <- tidyr::gather(subdf,topic,value,-id,-date,-journal,-text) %>%
+        dplyr::group_by(topic,date,journal, id) %>%
+        dplyr::summarize(value=mean(value))
+      plot <- ggplot2::ggplot(M,aes(x=date,color=journal,y=value)) +
+        ggplot2::geom_point() +
+        ggplot2::geom_line() +
+        ggplot2::facet_grid(topic~.) +
+        ggplot2::ggtitle(paste0("Topic makeup over time for topics ", min(colsToGraph), ":", max(colsToGraph)))
       print(plot)
     }
   } else {
-    M <- gather(df,topic,value,-id,-date,-journal,-text) %>%
-      group_by(topic,date,journal, id) %>%
-      summarize(value=mean(value))
-    plot <- ggplot(M,aes(x=date,color=journal,y=value)) +
-      geom_point() +
-      geom_line() +
-      facet_grid(topic~.)
+    M <- tidyr::gather(df,topic,value,-id,-date,-journal,-text) %>%
+      dplyr::group_by(topic,date,journal, id) %>%
+      dplyr::summarize(value=mean(value))
+    plot <- ggplot2::ggplot(M,aes(x=date,color=journal,y=value)) +
+      ggplot2::geom_point() +
+      ggplot2::geom_line() +
+      ggplot2::facet_grid(topic~.)
     print(plot)
   }
 }

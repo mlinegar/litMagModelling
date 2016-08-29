@@ -1,5 +1,5 @@
-#' Run LDA on a Mallet instance
-#' 
+#' DEPRICATED IN V0.1.1, see new example file. Run LDA on a Mallet instance
+#'
 #' @param topic.model topic.model usually taken from make_model, a Mallet object
 #' @param dataframe data.frame usually taken from prep_corpus, a data.frame with fields for text, journal, date
 #' @param n.topics numeric number of topics that we want from LDA
@@ -17,7 +17,7 @@
 #' @seealso \code{\link{prep_corpus}}, which creates the data.frame this function draws on
 #' \code{\link{make_model}}, which creates the mallet object this function uses
 #' @export
-#' @examples 
+#' @examples
 #' date_vec <- date_vec
 #' dataframe <- stripped_xmlData
 #' marsden_journals <- make_model(dataframe, 10, journalVec = c("Blast", "Egoist", "Freewoman", "NewFreewoman"))
@@ -26,10 +26,10 @@
 
 train_model <- function(topic.model, dataframe, n.topics, optFreq=20, burnIn=50, numRuns=200, num.topwords=5, datecolname = 'date', journalVec = NA, yearRangeRule = NA){
   # Quick and dirty solution - journalVec and yearRangeRule have to be the same as in the last function
-  ## Optimize hyperparameters every optFreq iterations, 
+  ## Optimize hyperparameters every optFreq iterations,
   ##  after burnIn burn-in iterations.
   topic.model$setAlphaOptimization(optFreq, burnIn)
-  
+
   ## Now train a model. Note that hyperparameter optimization is on, by default.
   ##  We can specify the number of iterations. Here we'll use a large-ish round number.
   topic.model$train(numRuns)
@@ -38,7 +38,7 @@ train_model <- function(topic.model, dataframe, n.topics, optFreq=20, burnIn=50,
   ## so we normalize, and add "smoothing" so that nothing has exactly 0 probability.
   doc.topics <- mallet.doc.topics(topic.model, smoothed=T, normalized=T)
   topic.words <- mallet.topic.words(topic.model, smoothed=T, normalized=T)
-  
+
   topics.labels <- rep("", n.topics)
   for(i in 1:n.topics){
     topics.labels[i] <- paste(mallet.top.words(topic.model,
