@@ -16,7 +16,7 @@
 #' marz.df <- train_model(marsden_journals, dataframe, c("Blast", "Egoist", "Freewoman", "NewFreewoman"))
 
 
-modelToDataframe <- function(topic.model, prepped_corpus, num.topwords=5, textcolname = 'text', incCorpusText = TRUE){
+modelToDataframe <- function(topic.model, prepped_corpus, n.topics = n.topics, num.topwords=5, textcolname = 'text', incCorpusText = TRUE){
   # will eventually make incCorpusText = FALSE by default, just need to figure out eval-parse for strings with ',' first
   ## Get the probability of topics in documents and the probability of words in topics.
   ## By default, these functions return raw word counts. Here we want probabilities,
