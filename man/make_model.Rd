@@ -2,11 +2,12 @@
 % Please edit documentation in R/make_model.R
 \name{make_model}
 \alias{make_model}
-\title{Create a Mallet instance list; from here we can gather word frequency statistics}
+\title{Create a Mallet object; from here we can gather word frequency statistics, and feed into createLDAvis}
 \usage{
 make_model(dataframe, n.topics, idcolname = "id", textcolname = "text",
-  datecolname = "date", journalVec = NA, yearRangeRule = NA,
-  stopListFile = "~/Dropbox/The Egoist PDFs/R/blankstopwords.txt")
+  datecolname = "date",
+  stopListFile = "~/Dropbox/The Egoist PDFs/R/blankstopwords.txt",
+  optFreq = 20, burnIn = 50, numRuns = 200)
 }
 \arguments{
 \item{dataframe}{data.frame usually taken from prep_corpus, a data.frame with fields for text, journal, date}
@@ -19,20 +20,21 @@ make_model(dataframe, n.topics, idcolname = "id", textcolname = "text",
 
 \item{datecolname}{string the name of the date column from dataframe}
 
-\item{journalVec}{vector a vector of the names of journals to be included. 
-possibile examples are "Blast", "Egoist", "Poetry Magazine", "Freewoman", "NewFreewoman"}
-
-\item{yearRangeRule}{string the rule specifying which years are to be included. Can take values like
-"> 1900", "==1919", etc.}
-
 \item{stopListFile}{string location of the stop list file to be run with Mallet. Defaults to the
-blank file provided by this package}
+blank file provided by this package. Note that this file must have a single word per line,
+and no special characters, and MUST be a .txt file}
+
+\item{optFreq}{numeric how often should mallet optimize parameters?}
+
+\item{burnIn}{numeric number of burn in iterations for LDA}
+
+\item{numRuns}{numeric total number of runs Mallet should run before finalizing a model}
 }
 \value{
 a Mallet object that from which we can get word frequencies, and can run LDA on
 }
 \description{
-Create a Mallet instance list; from here we can gather word frequency statistics
+Create a Mallet object; from here we can gather word frequency statistics, and feed into createLDAvis
 }
 \examples{
 date_vec <- date_vec

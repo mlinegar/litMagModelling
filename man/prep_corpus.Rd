@@ -4,8 +4,9 @@
 \alias{prep_corpus}
 \title{Create a database of text and metadata to feed into make_model}
 \usage{
-prep_corpus(xmlfolder, date_vec, wordsToRemove = NA, stemDoc = NA,
-  pattern = ".tei.xml")
+prep_corpus(xmlfolder, date_vec = date_vec, wordsToRemove = NULL,
+  stemDoc = FALSE, pattern = ".tei.xml", journalVec = NULL,
+  yearRangeRule = NULL)
 }
 \arguments{
 \item{xmlfolder}{string input folder with text files to run. Typically contains either XML files
@@ -19,6 +20,12 @@ from the MJP or files cleaned with stripXML}
 
 \item{pattern}{string pattern of the endings of the files of xmlfolder; defaults to
 '.tei.xml', but if xmlfolder is taken from stripXML, should be '.txt'}
+
+\item{journalVec}{vector a vector of the names of journals to be included.
+possibile examples are "Blast", "Egoist", "Poetry Magazine", "Freewoman", "NewFreewoman"}
+
+\item{yearRangeRule}{string the rule specifying which years are to be included. Can take values like
+"> 1900", "==1919", etc.}
 }
 \value{
 a data.frame of text for running with MALLET
@@ -30,7 +37,7 @@ Create a database of text and metadata to feed into make_model
 dataframe <- stripped_xmlData
 }
 \seealso{
-\code{\link{strip_dates}} and \code{\link{stripXML}} which this depends on, as well as 
+\code{\link{strip_dates}} and \code{\link{stripXML}} which this depends on, as well as
 \code{\link{make_model}}, which takes the data.frame created by this function as input
 }
 

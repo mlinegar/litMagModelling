@@ -25,6 +25,7 @@
 make_model <- function(dataframe, n.topics, idcolname='id', textcolname='text', datecolname = 'date',
                        stopListFile = "~/Dropbox/The Egoist PDFs/R/blankstopwords.txt",
                        optFreq=20, burnIn=50, numRuns=200){
+  library(rJava)
   # note that this stopword list won't really change anything, as we've already stemmed the doc
   df <- dataframe
   mallet.instances <- mallet::mallet.import(df[,idcolname], df[,textcolname], stoplist.file = stopListFile)

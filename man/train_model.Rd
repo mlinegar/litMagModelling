@@ -2,7 +2,7 @@
 % Please edit documentation in R/train_model.R
 \name{train_model}
 \alias{train_model}
-\title{Run LDA on a Mallet instance}
+\title{DEPRICATED IN V0.1.1, see new example file. Run LDA on a Mallet instance}
 \usage{
 train_model(topic.model, dataframe, n.topics, optFreq = 20, burnIn = 50,
   numRuns = 200, num.topwords = 5, datecolname = "date",
@@ -36,7 +36,7 @@ possibile examples are "Blast", "Egoist", "Poetry Magazine", "Freewoman", "NewFr
 a data.frame of topic frequencies by document that we can analyze and graph
 }
 \description{
-Run LDA on a Mallet instance
+DEPRICATED IN V0.1.1, see new example file. Run LDA on a Mallet instance
 }
 \examples{
 date_vec <- date_vec
