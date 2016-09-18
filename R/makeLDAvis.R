@@ -1,5 +1,5 @@
 #' Easy interface to LDAvis, only requires a trained topic.model as input
-#'
+#' @import rJava
 #' @param topic.model Mallet-object a trained topic.model from MALLET
 #' @param outDir character directory to store html/js/json files
 #' @param openBrowser logical should R open a browser to create visualizations?
@@ -9,10 +9,10 @@
 #' @export
 
 makeLDAvis <- function(topic.model, outDir = tempfile(), openBrowser = TRUE, asGist = FALSE, ...){
-  phi <- mallet.topic.words(topic.model, smoothed = TRUE, normalized = TRUE)
-  theta <- mallet.doc.topics(topic.model, smoothed = TRUE, normalized = TRUE)
-  doc.length <- rowSums(mallet.doc.topics(topic.model, smoothed = FALSE, normalized = FALSE))
-  word.freqs <- mallet.word.freqs(topic.model)
+  phi <- mallet::mallet.topic.words(topic.model, smoothed = TRUE, normalized = TRUE)
+  theta <- mallet::mallet.doc.topics(topic.model, smoothed = TRUE, normalized = TRUE)
+  doc.length <- rowSums(mallet::mallet.doc.topics(topic.model, smoothed = FALSE, normalized = FALSE))
+  word.freqs <- mallet::mallet.word.freqs(topic.model)
   vocab <- topic.model$getVocabulary()
   json <- list(
     phi = phi, theta = theta, doc.length = doc.length, vocab = vocab,

@@ -14,6 +14,8 @@
 #' graph_model(marsden_journals, chunkLen = 6)
 
 graph_model <- function(df, baseColNames=c("text", "date", "id", "journal"), chunkLen=10){
+  library(dplyr)
+  library(ggplot2)
   topic.df <- df[, -which(names(df) %in% baseColNames)]
   base.df <- df[, which(names(df) %in% baseColNames)]
   n.topics <- ncol(topic.df)

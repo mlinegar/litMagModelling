@@ -4,7 +4,7 @@
 #' @param prepped_corpus data.frame usually taken from prep_corpus, a data.frame with fields for text, journal, date
 #' @param textcolname string the name of the text column from prepped_corpus
 #' @param num.topwords numeric number of words to display on topic labels
-#' @paramincCorpusText logical whether or not to include the raw text data from prepped_corpus in the final data.frame to be output
+#' @param incCorpusText logical whether or not to include the raw text data from prepped_corpus in the final data.frame to be output
 #' @return a data.frame of topic frequencies by document that we can analyze and graph
 #' @seealso \code{\link{prep_corpus}}, which creates the data.frame this function draws on
 #' \code{\link{make_model}}, which creates the mallet object this function uses

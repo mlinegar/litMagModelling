@@ -4,8 +4,8 @@
 \alias{modelToDataframe}
 \title{Run LDA on a Mallet instance}
 \usage{
-modelToDataframe(topic.model, prepped_corpus, num.topwords = 5,
-  textcolname = "text", incCorpusText = TRUE)
+modelToDataframe(topic.model, prepped_corpus, n.topics = n.topics,
+  num.topwords = 5, textcolname = "text", incCorpusText = TRUE)
 }
 \arguments{
 \item{topic.model}{topic.model usually taken from make_model, a Mallet object}
@@ -15,6 +15,8 @@ modelToDataframe(topic.model, prepped_corpus, num.topwords = 5,
 \item{num.topwords}{numeric number of words to display on topic labels}
 
 \item{textcolname}{string the name of the text column from prepped_corpus}
+
+\item{incCorpusText}{logical whether or not to include the raw text data from prepped_corpus in the final data.frame to be output}
 }
 \value{
 a data.frame of topic frequencies by document that we can analyze and graph
