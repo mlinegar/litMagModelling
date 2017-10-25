@@ -11,6 +11,8 @@
 #' @param stopListFile string location of the stop list file to be run with Mallet. Defaults to the
 #' blank file provided by this package. Note that this file must have a single word per line,
 #' and no special characters, and MUST be a .txt file
+#' @param alpha.sum This is the magnitude of the Dirichlet prior over the topic distribution of a document. The default value is 5.0. With 10 topics, this setting leads to a Dirichlet with parameter α_k = 0.5. You can intuitively think of this parameter as a number of "pseudo-words", divided evenly between all topics, that are present in every document no matter how the other words are allocated to topics. This is an initial value, which may be changed during training if hyperparameter optimization is active. (This definition taken from the MALLET package.)
+#' @param beta This is the per-word weight of the Dirichlet prior over topic-word distributions. The magnitude of the distribution (the sum over all words of this parameter) is determined by the number of words in the vocabulary. Again, this value may change due to hyperparameter optimization. (This definition taken from the MALLET package.)
 #' @return a Mallet object that from which we can get word frequencies, and can run LDA on
 #' @seealso \code{\link{prep_corpus}}, which creates the data.frame this function draws on
 #' @export
@@ -24,13 +26,13 @@
 
 make_model <- function(dataframe, n.topics, idcolname='id', textcolname='text', datecolname = 'date',
                        stopListFile = "~/Dropbox/The Egoist PDFs/R/blankstopwords.txt",
-                       optFreq=20, burnIn=50, numRuns=200){
+                       optFreq=20, burnIn=50, numRuns=200, alpha.sum = 5, beta = 0.01){
   library(rJava)
   # note that this stopword list won't really change anything, as we've already stemmed the doc
   df <- dataframe
   mallet.instances <- mallet::mallet.import(df[,idcolname], df[,textcolname], stoplist.file = stopListFile)
   ## Create a topic trainer object.
-  topic.model <- mallet::MalletLDA(num.topics=n.topics)
+  topic.model <- mallet::MalletLDA(num.topics=n.topics, alpha.sum = alpha.sum, beta = beta)
   topic.model$loadDocuments(mallet.instances)
   ## Optimize hyperparameters every optFreq iterations,
   ##  after burnIn burn-in iterations.
